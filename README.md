@@ -178,7 +178,6 @@ src/
 
 <p>
   <b>Suvam Debnath</b><br>
-  Java Full Stack Developer | Spring Boot | Angular | Mendix Rapid Developer
 </p>
 
 <p>
