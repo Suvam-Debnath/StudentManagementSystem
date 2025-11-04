@@ -33,5 +33,3 @@ spring.jpa.hibernate.ddl-auto=update
 logging.level.org.hibernate.SQL=DEBUG
 
 
-![1](https://github.com/user-attachments/assets/0c6b30aa-0726-4942-8861-b17bc7a34229)
-![2](https://github.com/user-attachments/assets/12cb3dde-0897-43e8-83e0-55fed0bc22f1)
