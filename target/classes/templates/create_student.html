@@ -36,35 +36,35 @@
 				<div class = "card-body">
 					<form th:action="@{/students}" th:object = "${student}" method="POST">
 						<div class ="form-group">
-							<label> Student First Name </label>
+							<label> First Name </label>
 							<input
 							type = "text"
 							name = "firstName"
 							th:field = "*{firstName}"
 							class = "form-control"
-							placeholder="Enter Student First Name" 
+							placeholder="Enter first name"
 							/>
 						</div>
 						
 						<div class ="form-group">
-							<label> Student Last Name </label>
+							<label> Last Name </label>
 							<input
 							type = "text"
 							name = "lastName"
 							th:field = "*{lastName}"
 							class = "form-control"
-							placeholder="Enter Student Last Name" 
+							placeholder="Enter last name"
 							/>
 						</div>
 						
 						<div class ="form-group">
-							<label> Student Email </label>
+							<label> Email </label>
 							<input
 							type = "text"
 							name = "email"
 							th:field = "*{email}"
 							class = "form-control"
-							placeholder="Enter Student Email" 
+							placeholder="Enter email"
 							/>
 						</div>
 						
