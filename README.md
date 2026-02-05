@@ -2,7 +2,7 @@
 
 <p align="center">
   A <b>Spring Boot CRUD application</b> for managing student records.<br>
-  It allows users to <b>add, update, view, and delete students</b> easily through a web interface.
+  Easily <b>add, update, view, and delete students</b> using a simple web interface.
 </p>
 
 <hr>
@@ -10,38 +10,48 @@
 <h2>🚀 Tech Stack</h2>
 
 <ul>
-  <li><b>Backend:</b> Spring Boot</li>
-  <li><b>Frontend (View):</b> Thymeleaf</li>
-  <li><b>Database:</b> MySQL</li>
-  <li><b>ORM:</b> Spring Data JPA (Hibernate)</li>
-  <li><b>Server Port:</b> 8081</li>
+  <li>🧠 <b>Backend:</b> Spring Boot</li>
+  <li>🎨 <b>Frontend (View):</b> Thymeleaf</li>
+  <li>🗄️ <b>Database:</b> PostgreSQL</li>
+  <li>🔄 <b>ORM:</b> Spring Data JPA (Hibernate)</li>
+  <li>🐳 <b>Containerization:</b> Docker</li>
+  <li>⚙️ <b>Build Tool:</b> Maven</li>
+  <li>🌐 <b>Server Port:</b> 8081</li>
 </ul>
 
 <hr>
 
-<h2>⚙️ Configuration</h2>
+<h2>⚙️ Configuration (Environment Variables)</h2>
 
-<p>Add the following to your <code>application.properties</code> file:</p>
+<p>This project uses <b>environment variables</b> for database configuration.</p>
 
-<pre>
-<code>
-spring.application.name=Student-management-system
+<h3>🔐 Required Environment Variables</h3>
+
+<pre><code>
+DB_URL=jdbc:postgresql://localhost:5432/sms
+DB_USERNAME=postgres
+DB_PASSWORD=your_password
+</code></pre>
+
+<h3>📄 application.properties</h3>
+
+<pre><code>
+spring.application.name=student-management-system
 server.port=8081
 
-spring.datasource.url=jdbc:mysql://localhost:3306/sms
-spring.datasource.username=root
-spring.datasource.password=Suvam@123
+spring.datasource.url=${DB_URL}
+spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
 
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
 spring.jpa.hibernate.ddl-auto=update
-
-logging.level.org.hibernate.SQL=DEBUG
-</code>
-</pre>
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+</code></pre>
 
 <hr>
 
-<h2>📚 API Endpoints</h2>
+<h2>📚 Application Endpoints</h2>
 
 <table>
   <tr>
@@ -59,56 +69,34 @@ logging.level.org.hibernate.SQL=DEBUG
   <tr>
     <td><b>GET</b></td>
     <td>/students/new</td>
-    <td>Show form to create a new student</td>
+    <td>Show form to add a new student</td>
     <td>create_student.html</td>
   </tr>
   <tr>
     <td><b>POST</b></td>
     <td>/students</td>
-    <td>Save a new student to the database</td>
-    <td>Redirects to /students</td>
+    <td>Save a new student</td>
+    <td>Redirect → /students</td>
   </tr>
   <tr>
     <td><b>GET</b></td>
     <td>/students/edit/{id}</td>
-    <td>Show form to edit a specific student</td>
+    <td>Edit student by ID</td>
     <td>edit_student.html</td>
   </tr>
   <tr>
     <td><b>POST</b></td>
     <td>/students/{id}</td>
-    <td>Update student details by ID</td>
-    <td>Redirects to /students</td>
+    <td>Update student details</td>
+    <td>Redirect → /students</td>
   </tr>
   <tr>
     <td><b>GET</b></td>
     <td>/students/{id}</td>
-    <td>Delete a student by ID</td>
-    <td>Redirects to /students</td>
+    <td>Delete student</td>
+    <td>Redirect → /students</td>
   </tr>
 </table>
-
-<hr>
-
-<h2>🧩 Example Requests</h2>
-
-<h3>1. View All Students</h3>
-<pre><code>GET http://localhost:8081/students</code></pre>
-
-<h3>2. Add a New Student</h3>
-<pre><code>
-GET http://localhost:8081/students/new
-POST http://localhost:8081/students
-</code></pre>
-
-<h3>3. Edit an Existing Student</h3>
-<pre><code>
-GET http://localhost:8081/students/edit/{id}
-POST http://localhost:8081/students/{id}
-</code></pre>
-
-<h3>4. Delete a Student</h3>
-<pre><code>GET http://localhost:8081/students/{id}</code></pre>
 
 <hr>
 
@@ -128,25 +116,22 @@ src/
          │   ├── create_student.html
          │   └── edit_student.html
          └── application.properties
+Dockerfile
 </code></pre>
 
 <hr>
 
-<h2>💻 Run the Project</h2>
+<h2>🐳 Docker Support</h2>
 
-<ol>
-  <li>Clone the repository:
-    <pre><code>git clone https://github.com/yourusername/student-management-system.git</code></pre>
-  </li>
-  <li>Open the project in your IDE (IntelliJ / Eclipse / VS Code).</li>
-  <li>Update MySQL credentials in <code>application.properties</code>.</li>
-  <li>Run the application:
-    <pre><code>mvn spring-boot:run</code></pre>
-  </li>
-  <li>Open your browser and visit:
-    <pre><code>http://localhost:8081/students</code></pre>
-  </li>
-</ol>
+<h3>📄 Dockerfile</h3>
+
+<pre><code>
+FROM eclipse-temurin:17-jdk-alpine
+WORKDIR /app
+COPY target/student-management-system.jar app.jar
+EXPOSE 8081
+ENTRYPOINT ["java", "-jar", "app.jar"]
+</code></pre>
 
 <hr>
 
@@ -155,35 +140,11 @@ src/
 <ul>
   <li>✅ List all students</li>
   <li>✅ Add new student</li>
-  <li>✅ Edit existing student</li>
+  <li>✅ Update student details</li>
   <li>✅ Delete student</li>
-  <li>✅ Connected with MySQL database</li>
+  <li>✅ PostgreSQL integration</li>
+  <li>✅ Environment variable based configuration</li>
+  <li>✅ Dockerized application</li>
 </ul>
-
-<hr>
-
-<h2>📸 (Optional) Screenshots</h2>
-
-<p>You can include your UI screenshots here later for better presentation:</p>
-
-<pre><code>
-![Student List Page](screenshots/students-page.png)
-![Add Student Page](screenshots/create-student-page.png)
-![Edit Student Page](screenshots/edit-student-page.png)
-</code></pre>
-
-<hr>
-
-<h2>👨‍💻 Author</h2>
-
-<p>
-  <b>Suvam Debnath</b><br>
-</p>
-
-<p>
-  📧 <b>Email:</b> your-email@example.com <br>
-  🌐 <b>GitHub:</b> <a href="https://github.com/yourusername" target="_blank">https://github.com/yourusername</a>
-</p>
-
 
 
